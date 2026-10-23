@@ -1,0 +1,15 @@
+---
+import ServiceDetailView from "../../../views/ServiceDetailView.astro";
+
+export function getStaticPaths() {
+    return [
+        {params: {slug: 'web-development'}},
+        {params: {slug: 'digital-marketing'}},
+        {params: {slug: 'seo'}},
+    ];
+}
+
+const {slug} = Astro.params;
+---
+
+<ServiceDetailView lang="es" slug={slug as string} />

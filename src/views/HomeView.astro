@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { useTranslations,localizedPath } from "../il8n/utils";
+import type { Lang } from "../il8n/ui";
+
+interface Props {lang: Lang}
+const {lang} = Astro.props;
+const t = useTranslations(lang);
+
+const copy = {
+    en:{
+        h1: 'Websites, Marketing, and SEO that compound.',
+        sub: 'We help ambitious brands turn their digital presence into a measurable growth engine. Built on clean enggineering and honest reporting.',
+        ctaPrimary: 'Book a free consultation',
+        ctaSecondary: 'Explore services',
+        servicesTitle: 'What we do',
+        servicesSub: 'Thress focused disciplined, one integrated team.',
+    },
+    es: {
+        h1: 'Websites, marketing y SEO que generan resultados compuestos.',
+        sub: 'Ayudamos a marcas ambiciosas a convertir su presencia digital en un motor de crecimiento medible, con ingenieria limpia y reportes honestos.',
+        ctaPrimary: 'Agenda una consulta gratuita',
+        ctaSecondary: 'Ver servicios',
+        servicesTitle: 'Que hacemos',
+        servicesSub: 'Tres disciplinas enfocadas, un solo equipo integrado.',
+    },
+}[lang];
+
+const services = [
+    {slug: 'web-development', title: lang === 'es' ? 'Desarrollo Web' : 'Web Development', desc: lang === 'es' ? 'Sitios rapidos, accesibles y faciles de mantener.' : 'Fast, accessible websites built to last.'},
+    {slug: 'digital-marketing', title: lang === 'es' ? 'Marketing Digital' : 'Digital Marketing', desc: lang === 'es' ? 'Campanas que convierten presupuesto en clientes.' : 'Campaigns that turn budget into customers.'},
+    {slug: 'seo', title: 'SEO', desc: lang === "es" ? 'Visibilidad organica que crece cada mes.' : 'Organic visibility that grows month over month.'},
+];
+---
+
+<BaseLayout lang={lang} title="DigiComp" description={copy.sub}>
+    <section class="border-b border-line">
+        <div class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+            <h1 class="max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
+                {copy.h1}
+            </h1>
+            <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+                {copy.sub}
+            </p>
+            <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+                <a href={localizedPath('/contact', lang)} class="rounded-btn bg-accent px-6 py-3 text-center text-sm font-medium text-accent-fg transition-opacity hover:opacity-90">
+                    {copy.ctaPrimary}
+                </a>
+                <a href={localizedPath('/services', lang)} class="rounded-btn border border-line px-6 py-3 text-center text-sm font-medium transition-colors hover:bg-surface">
+                    {copy.ctaSecondary}
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="border-b border-line">
+        <div class="mx-auto max-w-6xl py-20 md:py-28">
+            <h2 class="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+                {copy.servicesTitle}
+            </h2>
+            <p class="mt-2 text-muted">
+                {copy.servicesSub}
+            </p>
+            <div class="mt-10 grid gap-5 md:grid-cols-3">
+                {services.map((s, i) => (
+                    <a href={localizedPath(`/services/${s.slug}`, lang)}
+                    class="group rounded-card border border-line bg-surface p-6 transition-colors hover:border-accent"
+                    >
+                        <span class="text-xs font-medium text-muted">0{i + 1}</span>
+                        <h3 class="mt-4 font-display text-lg font-semibold">{s.title}</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-muted">{s.desc}</p>
+                        <span class="mt-6 inline-block text-sm font-medium text-accent">
+                            {t('common.readMore')} →
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+            <div class="rounded-card border border-line bg-surface p-10 text-center md:p-16">
+                <h2 class="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+                    {lang === 'es' ? 'Listo para crecer?' : 'Ready to grow?'}
+                </h2>
+                <p class="mx-auto mt-3 max-w-xl text-muted">
+                    {lang === 'es'
+                    ? 'Cuentanos sobre tu proyecto y te responderemos en menos de 24 horas.'
+                    : 'Tell us about your project and we will get back to you within 24 hours.' 
+                    }
+                </p>
+                <a href={localizedPath('/contact', lang)} class="mt-8 inline-block rounded-btn bg-accent px-6 py-3 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90a">
+                {t('nav.cta')}
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

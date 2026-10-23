@@ -1,0 +1,54 @@
+---
+// src/views/ContactView.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/forms/ContactForm';
+import { SITE } from '../consts';
+import type { Lang } from '../il8n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    title: 'Contact Us',
+    hero: 'Let’s build something great together.',
+    sub: 'Fill out the form and we’ll get back to you within 24 hours. Or reach us directly via email or WhatsApp.',
+    emailLabel: 'Email us',
+    waLabel: 'Message us on WhatsApp',
+  },
+  es: {
+    title: 'Contacto',
+    hero: 'Construyamos algo grandioso juntos.',
+    sub: 'Completa el formulario y te responderemos en menos de 24 horas. O contáctanos directamente por correo o WhatsApp.',
+    emailLabel: 'Envíanos un correo',
+    waLabel: 'Escríbenos por WhatsApp',
+  }
+}[lang];
+---
+<BaseLayout lang={lang} title={copy.title}>
+  <section class="mx-auto max-w-6xl px-6 py-20 md:py-32">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+      
+      <div class="max-w-lg">
+        <h1 class="font-display text-4xl font-semibold tracking-tight md:text-5xl leading-tight">{copy.hero}</h1>
+        <p class="mt-6 text-lg text-muted leading-relaxed">{copy.sub}</p>
+        
+        <div class="mt-12 space-y-8">
+          <div>
+            <h3 class="text-xs font-medium uppercase tracking-wider text-muted mb-2">{copy.emailLabel}</h3>
+            <a href={`mailto:${SITE.email}`} class="text-xl font-medium hover:text-accent transition-colors">{SITE.email}</a>
+          </div>
+          <div>
+            <h3 class="text-xs font-medium uppercase tracking-wider text-muted mb-2">{copy.waLabel}</h3>
+            <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" class="text-xl font-medium hover:text-accent transition-colors">+{SITE.whatsapp}</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full rounded-card border border-line bg-surface p-6 md:p-10">
+        <ContactForm lang={lang} client:load />
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedPath } from "../il8n/utils";
+import type { Lang } from "../il8n/ui";
+
+interface Props {lang: Lang}
+const { lang } = Astro.props;
+
+const copy = {
+    en: {title: 'Page Not Found', sub: 'The page you are looking for doesnt existed or has been moved.', btn: 'Back to Home'},
+    es: {title: 'Pagina no encontrada', sub: 'La pagina que buscas no existe o ha sido movida', btn: 'Volver al Inicio'}
+}[lang];
+---
+
+<BaseLayout lang={lang} title={copy.title}>
+    <section class="mx-auto flex min-h[60vh] max-w-6xl flex-col items-center justify-center px-6 py-24 text-center">
+        <h1 class="font-display text-7xl md:text-9xl font-bold text-accent/20 mb-4">404</h1>
+        <h2 class="font-display text-3xl md:text-4xl font-semibold mb-4">{copy.title}</h2>
+        <p class="text-lg text-muted mb-8 max-w-md">{copy.sub}</p>
+        <a href={localizedPath('/', lang)} class="rounded-btn bg-accent px-8 py-3 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90">
+        {copy.btn}
+        </a>
+    </section>
+</BaseLayout>

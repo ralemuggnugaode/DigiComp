@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/blog/PostCard.astro";
+import { getPosts } from "../lib/content";
+import type { Lang } from "../il8n/ui";
+
+interface Props {lang: Lang}
+const {lang} = Astro.props;
+const posts = await getPosts(lang);
+
+const copy = {
+    en: { title: 'Insights & Articles', sub: 'Thoughts on web development, marketing, and search engine optimization.' },
+    es: { title: 'Articulos e Ideas', sub: 'Pensamientos sobre desarrollo web, marketing y optimizacion de motores de busqueda.' }
+}[lang];
+---
+
+<BaseLayout lang={lang} title={copy.title}>
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <h1 class="font-display text-4xl font-semibold tracking-tight md:text-5xl">{copy.title}</h1>
+        <p class="mt-4 max-w-2xl text-lg text-muted">{copy.sub}</p>
+
+        <div class="mt-10 max-w-md">
+            <div id="search"></div>
+            <p class="text-xs text-muted mt-2">*Search work after building the site.</p>
+        </div>
+    </div>
+</section>
+<section class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    {posts.length === 0 ? (
+        <p class="text-muted">No posts found.</p>
+    ): (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map(post => <PostCard post={post} lang={lang} />)}
+        </div>
+    )}
+</section>
+</BaseLayout>

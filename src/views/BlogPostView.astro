@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/blog/PostCard.astro";
+import { getPost, getRelatedPosts } from "../lib/content";
+import { localizedPath } from "../il8n/utils";
+import type { Lang } from "../il8n/ui";
+
+interface Props {lang: Lang; slug: string}
+const {lang, slug} = Astro.props;
+
+const post = await getPost(lang, slug);
+if (!post) return Astro.redirect('/404');
+
+const related = await getRelatedPosts(post);
+const date = new Date(post.publishedAt).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+
+const t = {
+    en: {back: '← Back to Blog', related: 'Related Articles', by: 'Written by'},
+    es: {back: '← Volver al blog', related: 'Articulos Relacionados', by: 'Escrito por'}
+}[lang];
+---
+
+<BaseLayout lang={lang} title={post.title} description={post.excerpt} image={post.cover}>
+<article class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <div class="text-center mb-12">
+        <a href={localizedPath('/blog', lang)} class="text-sm text-muted hover:text-accent mb-6 inline-block">{t.back}</a>
+        <div class="flex items-center justify-center gap-2 text-sm font-medium text-accent mb-4">
+            <span>{post.category.name}</span>
+        </div>
+        <h1 class="font-display text-3xl md:text-5xl font-semibold tracking-tight leading-tight">{post.title}</h1>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-muted">
+            <span>{t.by} <strong class="text-fg">{post.author.name}</strong></span>
+            <span>•</span>
+            <time datetime={post.publishedAt}>{date}</time>
+            <span>•</span>
+            <span>{post.readingMinutes} {lang === 'es' ? 'min de lectura' : 'min read'}</span>
+        </div>
+    </div>
+
+    {post.cover && (
+        <div class="mb-12 rounded-card overflow-hidden border border-line aspect-[2/1]">
+            <img src={post.cover} alt={post.title} class="w-full h-full object-cover">
+        </div>
+    )}
+
+    <div class="prose prose-lg dark:prose-invert max-w-none mx-auto">
+        <Fragment set:html={post.body} />
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-line flex gap-2 flex-wrap">
+        {post.tags.map(tag => (
+            <span class="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted bg-surface">
+                #{tag.name}
+            </span>
+        ))}
+    </div>
+</article>
+
+{related.length > 0 && (
+    <section class="border-t border-line bg-surface/50">
+        <div class="mx-auto max-w-6xl px-6 py-16">
+            <h2 class="font-display text-2xl font-semibold mb-8">{t.related}</h2>
+            <div class="grid gap-8 md:grid-cols-2">
+                {related.map(p => <PostCard post={p} lang={lang}/>)}
+            </div>
+        </div>
+    </section>
+)}
+
+<section class="mx-auto max-w-3xl px-6 py-6 border-t border-line mt-16">
+    <div class="rounded-card border border-dashed border-line p-12 text-center text-muted bg-surface">
+        <p class="text-sm">Sistem komentar sedang dalam maintenance.</p>
+    </div>
+</section>
+</BaseLayout>
+ <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.cover ? new URL(post.cover, Astro.site).toString() : Astro.site + '/images/og-default.png',
+    "datePublished": new Date(post.publishedAt).toISOString(),
+    "dateModified": new Date(post.publishedAt).toISOString(),
+    "author": {
+        "@type": "Person",
+        "name": post.author.name
+    },    
+    "publisher": {
+        "@type": "Organization",
+        "name": "DigiComp",
+        "logo": {
+            "@type": "ImageObject",
+            "url": Astro.site + '/favicon.svg'
+        }
+    }
+  })}></script>

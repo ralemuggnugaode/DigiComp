@@ -1,0 +1,35 @@
+---
+import {languages, type Lang} from '../../il8n/ui';
+import { parsePath, localizedPath } from '../../il8n/utils';
+import { getPost, getTranslatedPost } from '../../lib/content';
+
+interface Props {lang: Lang}
+const {lang} = Astro.props;
+const {path} = parsePath(Astro.url.pathname);
+const target: Lang = lang === 'en' ? 'es' : 'en';
+
+let targetUrl = localizedPath(path, target);
+
+if (path.includes('/blog/') && path !== '/blog') {
+    const currentSlug = path.split('/').pop();
+    if (currentSlug) {
+        const currentPost = await getPost(lang, currentSlug);
+        if (currentPost) {
+            const translatedPost = await getTranslatedPost(currentPost, target);
+            if (translatedPost) {
+                targetUrl = localizedPath(`/blog/${translatedPost.slug}`, target);
+            } else {
+                targetUrl = localizedPath('/blog', target)
+            }
+        }
+    }
+}
+---
+
+<a href={targetUrl}
+hreflang={target}
+class="inline-flex h-9 items-center rounded-btn border border-line px-2.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:text-fg"
+aria-label={`Switch to ${languages[target]}`}
+>
+{target}
+</a>

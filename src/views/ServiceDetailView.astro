@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedPath } from "../il8n/utils";
+import type { Lang } from "../il8n/ui";
+
+interface Props {lang: Lang; slug: string}
+const {lang, slug} = Astro.props;
+
+const content: Record<string, any> = {
+    'web-development': {
+        en: {title: 'Web Development', desc: 'We build static and dynamic websites that score perfectly on Core Web Vitals, turning visitors into customers.', features: ['Custom Astro & React Builds', 'Headless CMS integration', 'E-Commerce ready', 'SEO Optimized']},
+        es: {title: 'Desarrollo Web', desc: 'Construimos sitios web estaticos y dinamicos que obtienen puntajes perfectos en Core Web Vitals.', features:['Desarrollo a medida con Astro y React', 'Integracion con CMS Headless', 'Listo para E-Commerce', 'Optimizado para SEO']}
+    },
+    'digital-marketing': {
+        en: {title: 'Digital Marketing', desc: 'Strategic campaigns across search and social channels designed to maximize your ROI.', features: ['Paid Search (PPC)', 'Social Media Ads', 'Email Marketing', 'Conversion Rate Optimization']},
+        es: {title: 'Marketing Digital', desc: 'Campanas estrategicas en canales de busqueda y redes sociales disenadas para maximizar ru ROI.', features: ['Busqueda Pagada (PPC)', 'Anuncios en Redes Sociales', 'Email Marketing', 'Optimizacion de Tasa de Conversion']}
+    },
+    'seo': {
+        en: {title: 'SEO', desc: 'Technical and on-page SEO that builds sustainable organic traffic and outranks your competitors.', features: ['Technical Audits', 'Keyword Strategy', 'Content Optimization', 'Link Building']},
+        es: {title: 'SEO', desc: 'SEO tecnico y on-page que construye trafico organico sostenible y supera a tus competidores', features: ['Auditorias Tecnicas', 'Estrategia de Palabras Clave', 'Optimizacion de Contenido', 'Link Building']}
+    }
+};
+
+const data =  content[slug]?.[lang] || content['web-development'][lang];
+---
+
+<BaseLayout lang={lang} title={data.title}>
+    <section class="border-b border-line">
+        <div class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+            <a href={localizedPath(`/services`, lang)} class="text-sm text-muted hover:text-accent mb-8 inline-block">← {lang === 'es' ? 'Volver a servicios' : 'back to services'}</a>
+            <h1 class="max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl">{data.title}</h1>
+            <p class="mt-6 max-w-2xl text-lg text-muted leading-relaxed">{data.desc}</p>
+        </div>
+    </section>
+    <section>
+        <div class="mx-auto max-w-6xl px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="font-display text-2xl font-semibold mb-6">{lang === 'es' ? 'Qué incluye?' : 'What is included?'}</h2>
+                <ul class="space-y-4">
+                    {data.features.map((f: string) => (
+                        <li class="flex items-center gap-3 text-muted">
+                            <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            {f}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div class="rounded-card border border-line bg-surface p-8 flex flex-col justify-center items-start">
+                <h3 class="font-display text-xl font-semibold mb-2">{lang === 'es' ? 'Listo para empezar?' : 'Ready to start?'}</h3>
+                <p class="text-sm text-muted mb-6">{lang === 'es' ? 'Analicemos cómo este servicio puede ayudar a su negocio.' : 'Lets discuss how this service can help your business.'}</p>
+                <a href={localizedPath('/contact', lang)} class="rounded-btn bg-accent px-6 py-3 text-sm font-medium text-accent-fg hover:opacity-90">
+                    {lang === 'es' ? 'Contáctanos' : 'Contact Us'}
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
