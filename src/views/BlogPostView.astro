@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Comments from "../components/blog/Comments.astro";
 import PostCard from "../components/blog/PostCard.astro";
 import { getPost, getRelatedPosts } from "../lib/content";
 import { localizedPath } from "../il8n/utils";
@@ -67,10 +68,23 @@ const t = {
     </section>
 )}
 
-<section class="mx-auto max-w-3xl px-6 py-6 border-t border-line mt-16">
-    <div class="rounded-card border border-dashed border-line p-12 text-center text-muted bg-surface">
-        <p class="text-sm">Sistem komentar sedang dalam maintenance.</p>
+<section class="mx-auto max-w-3xl px-6 sm:py-6 py-12 md:py-16 border-t border-line mt-16">
+    <div class="flex items-center gap-4 mb-8">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 text-accent shrink-0">        
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </div>
+        <div>
+            <h2 class="font-display text-xl font-semibold mb-6">
+                {lang === 'es' ? 'Comentarios' : 'Comments'}
+            </h2>
+            <p class="text-sm text-muted mt-1">
+                { lang === 'es' ? 'Unete a la conversacion y comparte tus ideas.' : 'Join the conversation and share your thoughts.' }
+            </p>
+        </div>
     </div>
+    <Comments lang={lang} term={post.translationKey} />
 </section>
 </BaseLayout>
  <script type="application/ld+json" set:html={JSON.stringify({
@@ -93,4 +107,5 @@ const t = {
             "url": Astro.site + '/favicon.svg'
         }
     }
-  })}></script>
+  })}>
+</script>

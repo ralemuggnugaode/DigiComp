@@ -1,0 +1,26 @@
+#navbar-container{
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+}
+
+#main-header {
+    border: none;
+    background: transparent;
+}
+
+header.is-scrolled #navbar-container {
+    margin-top: 0.8rem;
+    max-width: 60rem;
+    border-radius: 9999px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-background-filter: blur(16px) saturate(180%);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+.dark header.is-scrolled #navbar-container {
+    background-color: rgba(11, 15, 20, 0.7);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}

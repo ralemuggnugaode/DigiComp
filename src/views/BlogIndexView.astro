@@ -30,7 +30,7 @@ const copy = {
     {posts.length === 0 ? (
         <p class="text-muted">No posts found.</p>
     ): (
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map(post => <PostCard post={post} lang={lang} />)}
         </div>
     )}
