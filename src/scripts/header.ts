@@ -6,7 +6,7 @@ export const initHeader = () => {
 
     if (header && sentinel) {
         if ((window as any).headerObserver) {
-            (window as any).headerObserver.disconnet();
+            (window as any).headerObserver.disconnect();
         }
         const observer = new IntersectionObserver(
             ([entry]) => {

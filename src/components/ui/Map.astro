@@ -1,0 +1,22 @@
+---
+interface Props {
+    class?: string;
+}
+const {class: className} = Astro.props;
+
+const lat = "-6.176364";
+const lon = "106.825326";
+const bbox = "106.821570, -6.173452, 106.829478, -6.178710";
+---
+
+<div class:list={["relative w-full overflow-hidden rounded-card border border-line bg-surface group", className]}>
+    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`}
+    class="absolute inset-0 w-full h-full grayscale opacity-80 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100" title="DigiComp Location"></iframe>    
+    <div class="absolute bottom-4 right-4 z-10">
+        <a href={`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}`} 
+        target="_blank" rel="noopener noreferrer"
+        class="rounded-btn bg-bg/90 backdrop-blur px-4 py-2 text-xs font-medium text-fg shadow-sm hover:bg-bg transition-colors"
+        > View Larger Map
+    </a>
+    </div>
+</div>

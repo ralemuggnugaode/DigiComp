@@ -27,7 +27,6 @@ function mapStrapiPost(strapiPost: StrapiPost): Post {
     };
 }
 
-// Kumpulan parameter populasi agar tidak ditulis berulang kali
 const populateParams = {
     'populate[author][fields][0]': 'name',
     'populate[author][fields][1]': 'slug',
@@ -45,7 +44,7 @@ const populateParams = {
 export async function getPosts(locale: 'en' | 'es'): Promise<Post[]> {
     const res = await fetchAPI<StrapiPost>('articles', {
         locale: locale,
-        ...populateParams, // Gunakan parameter di atas
+        ...populateParams,
         'sort[0]': 'publishedAt:desc',
     });
     return res.data.map(mapStrapiPost);

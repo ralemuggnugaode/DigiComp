@@ -1,7 +1,7 @@
 ---
-// src/views/ContactView.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/forms/ContactForm';
+import Map from '../components/ui/Map.astro';
 import { SITE } from '../consts';
 import type { Lang } from '../il8n/ui';
 
@@ -15,6 +15,8 @@ const copy = {
     sub: 'Fill out the form and we’ll get back to you within 24 hours. Or reach us directly via email or WhatsApp.',
     emailLabel: 'Email us',
     waLabel: 'Message us on WhatsApp',
+    addressLabel: 'Visit our office',
+    mapTitle: 'Find us here'
   },
   es: {
     title: 'Contacto',
@@ -22,6 +24,8 @@ const copy = {
     sub: 'Completa el formulario y te responderemos en menos de 24 horas. O contáctanos directamente por correo o WhatsApp.',
     emailLabel: 'Envíanos un correo',
     waLabel: 'Escríbenos por WhatsApp',
+    addressLabel: 'Visita nuesrta oficina',
+    mapTitle: 'Encuentranos aqui'
   }
 }[lang];
 ---
@@ -42,13 +46,30 @@ const copy = {
             <h3 class="text-xs font-medium uppercase tracking-wider text-muted mb-2">{copy.waLabel}</h3>
             <a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer" class="text-xl font-medium hover:text-accent transition-colors">+{SITE.whatsapp}</a>
           </div>
+          <div>
+            <h3 class="text-xs font-medium uppercase tracking-wider text-muted mb-2">{copy.addressLabel}</h3>
+            <p class="text-base text-fg leading-relaxed max-w-xs">
+              {SITE.address[lang]}
+            </p>
+          </div>
         </div>
       </div>
       
-      <div class="w-full rounded-card border border-line bg-surface p-6 md:p-10">
+      <div class="w-full rounded-card border border-line bg-surface p-6 md:p-10 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-transparent"></div>
         <ContactForm lang={lang} client:load />
       </div>
 
+      <div class="mt-20 md:mt-28">
+        <h2 class="font-display text-2xl font-semibold mb-6">{copy.mapTitle}</h2>
+        <Map class="h-[400px] md:h-[500px]" />
+      </div>
+
+    </div>
+  </section>
+  <section class="border-t border-line bg-surface/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24">
+      
     </div>
   </section>
 </BaseLayout>
