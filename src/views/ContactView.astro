@@ -71,8 +71,12 @@ const copy = {
           <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">{copy.mapTitle}</h2>
           <p class="mt-2 text-muted">
             {lang === 'es' 
-            ? (<>'Aquí nos encontrará, con una variedad de <a href={localizedPath('/services', lang)} class="relative inline-block text-accent font-medium transition-colors hover:text-accent/80 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-accent after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300">servicios</a> que se adaptan a sus necesidades.' </> ) 
-            : (<>'You can find us here, with a variety of suitable <a href={localizedPath('/services', lang)} class="relative inline-block text-accent font-medium transition-colors hover:text-accent/80 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-accent after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300">services.</a></>)}
+            ? (<>Aquí nos encontrará, con una variedad de <a href={localizedPath('/services', lang)} 
+            class="relative inline-block text-accent font-medium transition-colors hover:text-accent/80 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-accent after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300"
+            >servicios</a> que se adaptan a sus necesidades.</> ) 
+            : (<>You can find us here, with a variety of suitable <a href={localizedPath('/services', lang)} 
+            class="relative inline-block text-accent font-medium transition-colors hover:text-accent/80 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-accent after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300"
+            >services.</a></>)}
           </p>
         </div>
         <Map class="h-[400px] md:h-[500px] shadow-sm border-line/90" />

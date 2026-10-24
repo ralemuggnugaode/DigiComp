@@ -11,46 +11,110 @@ const copy = {
         title: 'About Us',
         hero: 'We build digital experiences that drive real business growth.',
         sub: 'DigiComp was founded on a simple belief: digital marketing and web development should be transparent, measurable, and build to last.',
+        missionTitle: 'Why we exist',
+        missionText1: 'We started DigiComp because we were tired of seeing agencies over-promise and under-deliver. We believe that a website is not juat a digital brochure it is the engine of your business.',
+        missionText2: 'Our approach combines technical excellence with data-driven marketing. We dont guess. we test, measure, and optimize until we see compound results.',        
         valuesTitle: 'Our Core Values',
         values: [
             {title: 'Honest Reporting', desc: 'No vanity metrics. We focus on the number that actually impact your bottom line.'},
             {title: 'Clean Engginering', desc: 'Fast, accesible, amd maintainable code is the foundation of everything we do.'},
             {title: 'Compound Growth', desc: 'We build systems that get better over time, not quick fixes that break tomorrow.'}
-        ]
+        ],
+        ctaTitle: 'Ready to partner with us?',
+        ctaDesc: 'Let\'s discuss how we can help you achieve your digital goals.',
+        ctaBtn: 'get in touch',
     },
     es: {
         title: 'Nosotros',
         hero: 'Creamos experiencias digitales que impulsan el crecimiento real del negocio',
         sub: 'DigiComp narcio de una creencia simple: el marketing digital y el desarrollo web deben ser transparentes, medibles y construidos para durar.',
+        missionTitle: 'Por que existimos',
+        missionText1: 'Fundamos DigiComp porque estabamos cansandos de ver agencias que prometian demasiado y entregaban poco. Creemos que un sitio web no es solo un folleto digital, es el motor de tu negocio.',
+        missionText2: 'Nuestro enfoque combina la excelencia tenicia con el marketing basado en datos. No adivinamos. probamos, medimos y optimizamos hasta ver resultado compuestos.',        
         valuesTitle: 'Nuestros Valores',
         values: [
             {title: 'Reportes Honestos', desc: 'Sin metricas de vanidad. Nos enfocamos en los numeros que realmente impactan tus resultados.'},
             {title: 'Ingenieria Limpia', desc: 'Codigo rapido, accessible y mantenible es la base de todo lo que hacemos.'},
             {title: 'Crecimiento Compuesto', desc: 'Construimos sistemas que mejoran con el tiempo, no soluciones rapidas que se rompen manana.'}
-        ]
+        ],
+        ctaTitle: 'Listo para asociarte con nosotros?',
+        ctaDesc: 'Hablemos de como podemos ayudarte e alcanzar tus objetivos digitales.',        
+        ctaBtn: 'Contactanos',
     }
 }[lang];
+
+const icons = [
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>',
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>',
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>'
+];
 ---
 
 <BaseLayout lang={lang} title={copy.title}>
-    <section class="border-b border-line">
-        <div class="mx-auto max-w-6xl px-6 py-24 md:py-32">
-            <h1 class="max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl">{copy.hero}</h1>
+    <section class="border-b border-line relative overflow-hidden">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 md:py-32">
+            <h1 class="max-w-4xl font-display text-4xl font-semibold tracking-tight md:text-6xl leading-[1.1]">{copy.hero}</h1>
             <p class="mt-6 max-w-2xl text-lg text-muted leading-relaxed">{copy.sub}</p>
         </div>
     </section>
-    <section>
-        <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-            <h2 class="font-display text-2xl font-semibold tracking-tight md:text-3xl mb-10">{copy.valuesTitle}</h2>
-            <div class="grid gap-8 md:grid-cols-3">
+    <section class="border-b border-line">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 md:py-28">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                <div>
+                    <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl mb-6">{copy.missionTitle}</h2>
+                    <p class="text-lg text-muted leading-relaxed mb-6 text-justify">{copy.missionText1}</p>
+                    <p class="text-lg text-muted leading-relaxed text-justify">{copy.missionText2}</p>
+                </div>
+                <div class="relative rounded-card border border-line bg-surface p-8 md:p-12 overflow-hidden hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/50 transition-all ease-out duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-bl-full"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-accent/5 rounded-tr-full"></div>
+                    <blockquote class="relative z-10 font-display text-2xl font-medium leading-relaxed">
+                        "Our goal isn't just to make you look good online. It's to make your business grow."
+                    </blockquote>
+                    <div class="mt-6 flex items-center gap-3 relative z-10">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-fg font-bold">D</div>
+                        <div>
+                            <div class="text-sm font-semibold">Founder</div>
+                            <div class="text-xs text-muted">DigiComp</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-accent/5 border-b border-line">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 md:py-28">
+            <div class="max-w-2xl mb-12">
+                <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">{copy.valuesTitle}</h2>
+                <p class="mt-4 text-lg text-muted">The principles that guide every project we take on.</p>
+            </div>
+            <div class="grid gap-6 md:grid-cols-3">
                 {copy.values.map((v, i) => (
-                    <div class="border-t border-line pt-6">
-                        <span class="text-xs font-medium text-accent mb-2 block">0{i + 1}</span>
-                        <h3 class="font-display text-lg font-semibold">{v.title}</h3>
+                    <div class="group rounded-card border border-line bg-bg p-8 transition-all hover:border-accent hover:shadow-md relative overflow-hidden">
+                        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-fg">
+                            <Fragment set:html={icons[i]} />
+                        </div>
+                        <h3 class="font-display text-xl font-semibold">{v.title}</h3>
                         <p class="mt-3 text-sm text-muted leading-relaxed">{v.desc}</p>
+                        <span class="absolute top-6 right-6 text-4xl font-bold text-line/30 pointer-events-none transition-colors group-hover:text-accent/10">0{i+1}</span>
                     </div>
                 ))}
+            </div>  
+        </div>
+    </section>
+    <section>
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 md:py-28">
+            <div class="rounded-card border-line bg-surface p-10 text-center md:p-16 relative overflow-hidden">
+                <div class="absolute inset-0 bg-linear-to-br from-accent/5 to-transparent"></div>
+                <div class="relative z-10">
+                    <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">{copy.ctaTitle}</h2>
+                    <p class="mx-auto mt-4 max-w-xl text-lg text-muted">{copy.ctaDesc}</p>
+                    <a href={localizedPath('/contact', lang)} class="mt-8 inline-block rounded-btn bg-accent px-8 py-3.5 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90">
+                        {copy.ctaBtn}
+                    </a>
+                </div>
             </div>
+
         </div>
     </section>
 </BaseLayout>

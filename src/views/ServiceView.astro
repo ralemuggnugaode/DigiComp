@@ -10,16 +10,26 @@ const copy = {
     en: {
         title: 'Our Services',
         hero: 'Expertise build for modern business.',
-        sub: 'Three focused disciplines. One integrated team dedicated to your growth.',
+        sub: 'Four focused disciplines. One integrated team dedicated to your growth.',
         processTitle: 'How we work',
-        steps: ['Discovery', 'Strategy', 'Execution', 'Optimization'],
+        steps: [
+            {title: 'Discovery', desc: 'We dive deep into your business, market, and competitors to understabd your current standing and identify opportunities.'},
+            {title: 'Strategy', desc: 'We create a custom roadmap tailored to your goals, defining the exact channels, timelines, and tactics we will use.'},
+            {title: 'Execution', desc: 'Our team gets to work-building, writing, and optimizing. We maintain transparent communication throughout the proccess.'},
+            {title: 'Optimization', desc: 'We continuously track results, run A/B tests, and refine our approach to maximize your ROI over time.'}
+        ],
     },
     es: {
         title: 'Servicios',
         hero: 'Experiencia construida para negocios modernos.',
-        sub: 'Tres disciplinas enfocadas. Un solo equipo integrado dedicado a tu crecimiento.',
+        sub: 'Cuatro disciplinas enfocadas. Un solo equipo integrado dedicado a tu crecimiento.',
         processTitle: 'Como trabajamos',
-        steps: ['Descubrimiento', 'Estrategia', 'Ejecucion', 'Optimizacion'],
+        steps: [
+            {title: 'Descubrimiento', desc: 'Nos sumergimos en tu negocio, mercado y competidores para entender tu situacion actual e identificar opportunudades.'},
+            {title: 'Estrategia', desc: 'Creamos una hoja de ruta personalizada para tus objetivos, definiendo los canales, plazos y tacticas exactas.'},
+            {title: 'Ejecucion', desc: 'Nuestro equipo se pone a trabajar: construyendo, escribiendo y optimizando. Mantenemos una comunicacion transparente.'},
+            {title: 'Optimizacion', desc: 'Rastreamos continumente los resultados, ejecutamos pruebas A/B y refinamos nuestro enfoque para maximizar tu ROI. '}            
+        ],
     }
 }[lang];
 
@@ -27,6 +37,7 @@ const services = [
     {slug: 'web-development', title: lang === 'es' ? 'Desarrollo Web' : 'Web Development', desc: lang === 'es' ? 'Sitios ultrarrapidos y accesibles usando tecnologias modernas como Astro y React.' : 'Ultra-fast, accessible websites usinf modern technologies like Astro and React.'},
     {slug: 'digital-marketing', title: lang === 'es' ? 'Marketing Digital' : 'Digital Marketing', desc: lang === 'es' ? 'Campanas basadas en datos que convierten el presupuesto en clientes reales.' : 'Data-driven campaigns that turn budget into real customers.'},
     {slug: 'seo', title: 'SEO', desc: lang === 'es' ? 'Visibilidad organica sostenible que se compone mes tras mes.' : 'Sustainable organic visibility that compounds month over month.'},    
+    {slug: 'ui-ux-design', title: 'UI/UX Design', desc: lang === 'es' ? 'Interfaces intuitivas que deleitan a los usuarios e impulsan las conversiones.' : 'Intuitive interfaces that delight users and drive conversions.'},    
 ];
 ---
 
@@ -37,12 +48,20 @@ const services = [
             <p class="mt-6 max-w-2xl text-lg text-muted leading-relaxed">{copy.sub}</p>            
         </div>
     </section>
-    <section class="border-b border-line">
-        <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-            <div class="grid gap-6 md:grid-cols-3">
+    <section class="border-b border-line bg-surface/30">
+        <div class="mx-auto max-w-6xl px-4 py-20 md:py-28">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">
+                    {lang === 'es' ? 'Nuestros Servicios' : 'Our Services'}
+                </h2>
+                <p class="mt-4 text-lg text-muted">
+                    {lang === 'es' ? 'Soluciones integrales disenadas para impulsar tu negocio' : 'Comprehensive solutions designed ro drive your business forward.'}
+                </p>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2">
                 {services.map((s, i) => (
-                    <a href={localizedPath(`/services/${s.slug}`, lang)} class="group flex flex-col rounded-card border border-line bg-surface p-8 transition-all hover:border-accent hover:shadow-sm">
-                        <span class="text-xs font-medium text-muted">0{i + 1}</span>
+                    <a href={localizedPath(`/services/${s.slug}`, lang)}
+                    class="group relative flex flex-col justify-between rounded-card border border-line bg-bg p-8 transition-all hover:border-accent hover:shadow-xl hover:-translate-y-1.5 overflow-hidden duration-300 hover:shadow-accent/5">
                         <h3 class="mt-4 font-display text-xl font-semibold group-hover:text-accent transition-colors">{s.title}</h3>
                         <p class="mt-3 grow text-sm text-muted leading-relaxed">{s.desc}</p>
                         <div class="mt-8 text-sm font-medium text-accent flex items-center gap-2">
@@ -54,20 +73,86 @@ const services = [
             </div>
         </div>
     </section>
-    <section>
-        <div class="mx-auto max-w-6xl px-6 py-20 md:py-20 text-center">
-            <h2 class="font-display text-2xl font-semibold tracking-tight md:text-3xl mb-12">{copy.processTitle}</h2>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12">
-                {copy.steps.map((step,i) => (
-                    <div class="flex items-center gap-4">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-fg text-sm font-bold">
-                            {i + 1}
+    <section class="border-b border-line bg-surface/30">
+        <div class="mx-auto max-w-4xl px-4 sm:px-6 py-20 md:py-28">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl mb-16">{copy.processTitle}</h2>
+            </div>
+            <div class="relative">
+                <div class="hidden md:block absolute top-6 left-[12%] right-[12%] h-[2px] bg-line z-0"></div>
+                <div class="flex flex-col md:flex-row justify-between relative z-10 gap-2 md:gap-0">
+                    {copy.steps.map((step, i) => (
+                         <div class="step-item md:w-1/4 flex flex-col items-center w-full border-b border-line md:border-none pb-4 md:pb-0">
+                            <button class="step-trigger group flex flex-col items-center gap-4 focus:outline-none w-full md:w-1/4" data-index={i}>
+                                <div class="step-number flex h-12 w-12 items-center justify-center rounded-full border-2 border-line bg-bg text-sm font-bold font-display text-muted transition-all duration-300 group-hover:border-accent group-hover:text-accent">
+                                    0{i + 1}
+                                </div>
+                                <span class="step-title font-display text-base font-semibold text-muted transition-colors duration-300 group-hover:text-accent text-center px-2">
+                                    {step.title}
+                                </span>
+                            </button>
+                            <div class="step-content-mobile grid grid-rows-[0fr] transition-all duration-300 ease-in-out md:hidden w-full text-center">
+                                <div class="overflow-hidden">
+                                    <p class="pt-4 px-4 text-sm text-muted leading-relaxed pb-4">
+                                        {step.desc}
+                                    </p>
+                                </div>
+                            </div>
+                         </div>
+                    ))}
+                </div>
+                <div class="hidden md:block mt-12 relative min-h-[140px]">
+                    {copy.steps.map((step, i) => (
+                        <div class="step-content-desktop absolute inset-0 opacity-0 invisible transition-all duration-500 ease-out translate-y-4" data-index={i}>
+                            <div class="rounded-card border border-line bg-bg p-8 shadow-sm text-left">
+                                <h4 class="font-display text-lg font-semibold text-accent mb-2">{step.title}</h4>
+                                <p class="text-muted leading-relaxed">
+                                    {step.desc}
+                                </p>
+                            </div>
                         </div>
-                        <span class="font-medium">{step}</span>
-                        {i < copy.steps.length - 1 && <span class="hidden md:block text-line">→</span>}
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     </section>
 </BaseLayout>
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const triggers = document.querySelectorAll<HTMLButtonElement>('.step-trigger');
+        const mobileContents = document.querySelectorAll<HTMLDivElement>('.step-content-mobile');
+        const desktopContents = document.querySelectorAll<HTMLDivElement>('.step-content-desktop');
+
+        triggers.forEach((trigger, index) => {
+            trigger.addEventListener('click', () => {
+                triggers.forEach(t => {
+                    t.querySelector('.step-number')?.classList.remove('bg-accent', 'text-accent-fg', 'border-accent', 'scale-110', 'shadow-md');
+                    t.querySelector('.step-title')?.classList.remove('text-accent', 'font-bold');
+                    t.querySelector('.step-title')?.classList.add('text-muted');
+                });
+                
+                mobileContents.forEach(c => {
+                    c.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+                });
+
+                desktopContents.forEach(c => {
+                    c.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                    c.classList.add('opacity-0', 'invisible', 'translate-y-4');
+                });
+
+                trigger.querySelector('.step-number')?.classList.add('bg-accent', 'text-accent-fg', 'border-accent', 'scale-110', 'shadow-md');
+                trigger.querySelector('.step-title')?.classList.remove('text-muted');
+                trigger.querySelector('.step-title')?.classList.add('text-accent', 'font-bold');
+                
+                mobileContents[index]?.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+
+                desktopContents[index]?.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+                desktopContents[index]?.classList.add('opacity-100', 'visible', 'translate-y-0');
+            });
+        });
+
+        if (triggers.length > 0) {
+            triggers[0].click();
+        }
+    });
+</script>

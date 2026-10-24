@@ -13,16 +13,50 @@ const copy = {
         sub: 'We help ambitious brands turn their digital presence into a measurable growth engine. Built on clean enggineering and honest reporting.',
         ctaPrimary: 'Book a free consultation',
         ctaSecondary: 'Explore services',
+        statsTitle: 'Trusted by ambitious brands',
+        stat1: 'Project Delivered',
+        stat2: 'Avg. Organic Growth',
+        stat3: 'Client Retention',
         servicesTitle: 'What we do',
         servicesSub: 'Thress focused disciplined, one integrated team.',
+        processTitle: 'How we work',
+        processSub: 'A Systematic approach to turning your digital presence into a revenue driver.',
+        step1Title: 'Discover & Strategy',
+        step1Desc: 'We analyze your market, competitors, and current performance to build a custom roadmap.',
+        step2Title: 'Build & Execute',
+        step2Desc: 'Our team executes with clean code, data-driven campaigns, and technial precision.',
+        step3Title: 'Scale & Optimize',
+        step3Desc: 'We continuously monitor results, run A/B tests, and scale what works to maximize ROI.',
+        testQuote: '"DigiComp completely transformed our digital presence. Our organic traffic tripled in just six months, and the quality of leads is unmatched"',
+        testiAuthor: 'Jeanice Doe',
+        testiRole: 'CMO at TechFlow',
+        ctaTitle: 'Ready to grow?',
+        ctaDesc: 'Tell us about your project and we will get back to you within 24 hours.'
     },
     es: {
         h1: 'Websites, marketing y SEO que generan resultados compuestos.',
         sub: 'Ayudamos a marcas ambiciosas a convertir su presencia digital en un motor de crecimiento medible, con ingenieria limpia y reportes honestos.',
         ctaPrimary: 'Agenda una consulta gratuita',
         ctaSecondary: 'Ver servicios',
+        statsTitle: 'Con la cinfianza de marcas amiciosas',
+        stat1: 'Proyectos Entregados',
+        stat2: 'Crecimiento Organico Prom.',
+        stat3: 'Retencion de Clientes',
         servicesTitle: 'Que hacemos',
         servicesSub: 'Tres disciplinas enfocadas, un solo equipo integrado.',
+        processTitle: 'Como trabajamos',
+        processSub: 'Un enfoque sistematico para convertir tu presencia digital en un motor de ingresos.',
+        step1Title: 'Descubrir y Estrategia',
+        step1Desc: 'Analizamos tu mercado, competidores y rendimiento actual para construir una hoja de ruta personalizada.',
+        step2Title: 'Construir y Ejecutar',
+        step2Desc: 'Nuestro equipo ejecuta con codigo limipo, campanas basadas en datos y precision tecnica.',
+        step3Title: 'Escalar y Optimizar',
+        step3Desc: 'Monitoreamos continuamente los redultados y escalamos lo que funciona para mmaximiziar el ROI.',
+        testQuote: '"DigiComp transformo completamente nuesatra presencia digital. Nuestro trafico organico se triplico en solo seis meses."',
+        testiAuthor: 'Jeanice Doe',
+        testiRole: 'CMO en TechFlow',
+        ctaTitle: 'Listo para crecer?',
+        ctaDesc: 'Cuentanos sobre tu proyecto y te responderemos en menos des 24 horas.',
     },
 }[lang];
 
@@ -30,6 +64,8 @@ const services = [
     {slug: 'web-development', title: lang === 'es' ? 'Desarrollo Web' : 'Web Development', desc: lang === 'es' ? 'Sitios rapidos, accesibles y faciles de mantener.' : 'Fast, accessible websites built to last.'},
     {slug: 'digital-marketing', title: lang === 'es' ? 'Marketing Digital' : 'Digital Marketing', desc: lang === 'es' ? 'Campanas que convierten presupuesto en clientes.' : 'Campaigns that turn budget into customers.'},
     {slug: 'seo', title: 'SEO', desc: lang === "es" ? 'Visibilidad organica que crece cada mes.' : 'Organic visibility that grows month over month.'},
+    {slug: 'ui-ux-design', title: 'UI/UX Design', desc: lang === 'es' ? 'Interfaces intuitivas que deleitan a los usuarios e impulsan las conversiones.' : 'Intuitive interfaces that delight users and drive conversions.'},
+
 ];
 ---
 
@@ -52,45 +88,111 @@ const services = [
             </div>
         </div>
     </section>
+    <section class="border-b border-line bg-surface/30">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-line text-center">
+                <div class="pt-4 md:pt-0">
+                    <p class="font-display text-4xl font-bold text-fg">150+</p>
+                    <p class="mt-2 text-sm font-medium text-muted">{copy.stat1}</p>
+                </div>
+                <div class="pt-4 md:pt-0">
+                    <p class="font-display text-4xl font-bold text-accent">+180</p>
+                    <p class="mt-2 text-sm font-medium text-muted">{copy.stat2}</p>
+                </div>
+                <div class="pt-4 md:pt-0">
+                    <p class="font-display text-4xl font-bold text-fg">95%</p>
+                    <p class="mt2 text-sm font-medium text-muted">{copy.stat3}</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="border-b border-line">
-        <div class="mx-auto px-4 max-w-6xl py-20 md:py-28">
-            <h2 class="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-                {copy.servicesTitle}
-            </h2>
-            <p class="mt-2 text-muted">
-                {copy.servicesSub}
-            </p>
-            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mx-auto px-4 max-w-6xl sm:px-6 py-20 md:py-28">
+            <div class="max-w-2xl">
+                <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">
+                    {copy.servicesTitle}
+                </h2>
+                <p class="mt-4 text-lg text-muted">
+                    {copy.servicesSub}
+                </p>
+            </div>
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
                 {services.map((s, i) => (
                     <a href={localizedPath(`/services/${s.slug}`, lang)}
-                    class="group rounded-card border border-line bg-surface p-6 transition-colors hover:border-accent"
+                    class="group flex flex-col rounded-card border border-line bg-surface p-8 transition-all hover:shadow-sm hover:border-accent"
                     >
-                        <span class="text-xs font-medium text-muted">0{i + 1}</span>
-                        <h3 class="mt-4 font-display text-lg font-semibold">{s.title}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-muted">{s.desc}</p>
-                        <span class="mt-6 inline-block text-sm font-medium text-accent">
-                            {t('common.readMore')} →
+                        <h3 class="font-display text-xl font-semibold">{s.title}</h3>
+                        <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{s.desc}</p>
+                        <span class="mt-6 inline-flex items-center text-sm font-medium text-accent">
+                            {t('common.readMore')}
+                            <svg class="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span>
                     </a>
                 ))}
             </div>
         </div>
     </section>
+    <section class="border-b border-line bg-surface/30">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 md:py-28">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">{copy.processTitle}</h2>
+                <p class="mt-4 text-lg text-muted">{copy.processSub}</p>
+            </div>
+            <div class="grid gap-8 md:grid-cols-3 relative">
+                <div class="hidden md:block absolute top-8 left-[16%] right-[16%] h-px bg-line -z-10"></div>
+                    <div class="relative text-center">
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-line bg-bg text-xl font-bold font-display text-accent mb-6 hover:bg-accent hover:text-accent-fg transition-colors">1</div>
+                        <h3 class="font-display text-lg font-semibold">{copy.step1Title}</h3>
+                        <p class="mt-3 text-sm text-muted leading-relaxed px-4">{copy.step1Desc}</p>
+                    </div>
+                    <div class="relative text-center">
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-line bg-bg text-xl font-bold font-display text-accent mb-6 hover:bg-accent hover:text-accent-fg transition-colors">2</div>
+                        <h3 class="font-display text-lg font-semibold">{copy.step2Title}</h3>
+                        <p class="mt-3 text-sm text-muted leading-relaxed px-4">{copy.step2Desc}</p>
+                    </div>
+                    <div class="relative text-center">
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-line bg-bg text-xl font-bold font-display text-accent mb-6 hover:bg-accent hover:text-accent-fg transition-colors">3</div>
+                        <h3 class="font-display text-lg font-semibold">{copy.step3Title}</h3>
+                        <p class="mt-3 text-sm text-muted leading-relaxed px-4">{copy.step3Desc}</p>
+                    </div>
+            </div>
+        </div>
+    </section>
+    <section class="border-b border-line">
+        <div class="mx-auto max-w-4xl px4 px-6 sm:px-6 py-20 text-center">
+            <svg class="mx-auto w-10 h-10 text-line mb-6" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path>
+            </svg>
+            <blockquote class="font-display text-2xl font-medium leading-relaxed md:text-3xl text-balance">
+                {copy.testQuote}
+            </blockquote>
+            <div class="mt-8 flex items-center justify-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-accent-fg font-bold">S</div>
+                <div class="text-left">
+                    <div class="text-sm font-semibold">{copy.testiAuthor}</div>
+                    <div class="text-xs text-muted">{copy.testiRole}</div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section>
         <div class="mx-auto max-w-6xl px-4 sm:px-6 py-20 md:py-28">
-            <div class="rounded-card border border-line bg-surface p-10 text-center md:p-16">
-                <h2 class="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-                    {lang === 'es' ? 'Listo para crecer?' : 'Ready to grow?'}
-                </h2>
-                <p class="mx-auto mt-3 max-w-xl text-muted">
-                    {lang === 'es'
-                    ? 'Cuentanos sobre tu proyecto y te responderemos en menos de 24 horas.'
-                    : 'Tell us about your project and we will get back to you within 24 hours.' 
-                    }
-                </p>
-                <a href={localizedPath('/contact', lang)} class="mt-8 inline-block rounded-btn bg-accent px-4 sm:px-6 py-3 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90a">
-                {t('nav.cta')}
-                </a>
+            <div class="rounded-card border border-line bg-surface p-10 text-center md:p-16 relative overflow-hidden">
+                <div class="absolute inset-0 bg-linear-to-br from-accent/5 to-transparent"></div>
+                <div class="relative z-10">
+                    <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">
+                        {lang === 'es' ? 'Listo para crecer?' : 'Ready to grow?'}
+                    </h2>
+                    <p class="mx-auto mt-4 max-w-xl text-lg text-muted">
+                        {lang === 'es'
+                        ? 'Cuentanos sobre tu proyecto y te responderemos en menos de 24 horas.'
+                        : 'Tell us about your project and we will get back to you within 24 hours.'
+                        }
+                    </p>
+                    <a href={localizedPath('/contact', lang)} class="mt-8 inline-block rounded-btn bg-accent px-8 py-3.5 text-sm sm:px-6 font-medium text-accent-fg transition-opacity hover:opacity-90">
+                    {t('nav.cta')}
+                    </a>
+                </div>
             </div>
         </div>
     </section>
