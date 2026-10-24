@@ -9,8 +9,8 @@ export const SITE = {
         instagram: 'https://www.instagram.com/dospey_/'
     },
     address: {
-        en: '123 Digital Avenue, Suite 400, Silicon Valley, CA 94025',
-        es: '123 Avenida Digital, Suite 400, Silicon Valley, CA 94025',
+        en: 'RW 02, Gambir, Central Jakarta, Special Capital Region of Jakarta, 10110, Indonesia',
+        es: 'RW 02, Gambir, Central Yakarta, Región Capital Especial de Yakarta, 10110, Indonesia',
     }
 }as const;
 

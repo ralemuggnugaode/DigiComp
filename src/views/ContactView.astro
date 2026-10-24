@@ -4,6 +4,7 @@ import ContactForm from '../components/forms/ContactForm';
 import Map from '../components/ui/Map.astro';
 import { SITE } from '../consts';
 import type { Lang } from '../il8n/ui';
+import { localizedPath } from '../il8n/utils';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -49,27 +50,32 @@ const copy = {
           <div>
             <h3 class="text-xs font-medium uppercase tracking-wider text-muted mb-2">{copy.addressLabel}</h3>
             <p class="text-base text-fg leading-relaxed max-w-xs">
-              {SITE.address[lang]}
+              <a href="#map" class="text-xl font-medium hover:text-accent transition-colors">
+                {SITE.address[lang]}
+              </a>
             </p>
           </div>
         </div>
       </div>
       
       <div class="w-full rounded-card border border-line bg-surface p-6 md:p-10 shadow-sm relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-transparent"></div>
+        <div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-accent to-transparent"></div>
         <ContactForm lang={lang} client:load />
-      </div>
-
-      <div class="mt-20 md:mt-28">
-        <h2 class="font-display text-2xl font-semibold mb-6">{copy.mapTitle}</h2>
-        <Map class="h-[400px] md:h-[500px]" />
-      </div>
+      </div>     
 
     </div>
   </section>
-  <section class="border-t border-line bg-surface/30">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24">
-      
+  <section id="map" class="border-t border-line bg-surface/30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-24">      
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">{copy.mapTitle}</h2>
+          <p class="mt-2 text-muted">
+            {lang === 'es' 
+            ? (<>'Aquí nos encontrará, con una variedad de <a href={localizedPath('/services', lang)} class="relative inline-block text-accent font-medium transition-colors hover:text-accent/80 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-accent after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300">servicios</a> que se adaptan a sus necesidades.' </> ) 
+            : (<>'You can find us here, with a variety of suitable <a href={localizedPath('/services', lang)} class="relative inline-block text-accent font-medium transition-colors hover:text-accent/80 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-accent after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300">services.</a></>)}
+          </p>
+        </div>
+        <Map class="h-[400px] md:h-[500px] shadow-sm border-line/90" />
     </div>
   </section>
 </BaseLayout>
