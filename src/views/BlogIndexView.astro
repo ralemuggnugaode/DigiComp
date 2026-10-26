@@ -22,7 +22,6 @@ const copy = {
 
         <div class="mt-10 max-w-md">
             <div id="search"></div>
-            <p class="text-xs text-muted mt-2">*Search work after building the site.</p>
         </div>
     </div>
 </section>
@@ -36,3 +35,25 @@ const copy = {
     )}
 </section>
 </BaseLayout>
+<script is:inline>
+    function initPagefind() {
+        const searchE1 = document.getElementById('search');
+        if (searchE1 && typeof PagefindUI !== 'undefined') {
+            searchE1.innerHTML = '';
+            new PagefindUI ({
+                element: '#search',
+                showSubResults: true,
+                translations: {
+                    placeholder: "Search articles...",
+                    zero_results: "No results for [SEARCH_TERM]"
+                }
+            });
+        } else if (searchE1) {
+            setTimeout(initPagefind, 100);
+        }
+    }
+
+    initPagefind();
+
+    document.addEventListener('astro:page-load', initPagefind);
+</script>

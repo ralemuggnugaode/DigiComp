@@ -11,6 +11,15 @@
     --line: #e6e8eb;
     --accent: #2563eb;
     --accent-fg: #ffffff;
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--fg);
+    --pagefind-ui-background: var(--bg);
+    --pagefind-ui-border: var(--line);
+    --pagefind-ui-tag: var(--line);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-font: var(--font-sans);
 }
 
 .dark {
@@ -21,6 +30,21 @@
     --line: #1f2937;
     --accent: #60a5fa;
     --accent-fg: #0b0f14;
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--fg);
+    --pagefind-ui-backgorund: var(--surface);
+    --pagefind-ui-border: var(--line);
+    --pagefind-ui-tag: var(--bg);
+}
+
+.pagefind-ui__search-input {
+    background-color: var(--surface) !important;
+    color: var(--fg) !important;
+    border-color: var(--line) !important;
+}
+
+.pagefind-ui__search-input:focus {
+    border-color: var(--accent) !important;
 }
 
 @theme inline {
@@ -61,3 +85,10 @@
 }
 
 @source "../components";
+
+html.dark #search {
+    --pf-text: var(--fg);
+    --pf-background: var(--bg);
+    --pf-border: var(--line);
+    --pf-hover: var(--surface);
+}
