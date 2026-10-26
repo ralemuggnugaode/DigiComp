@@ -5,14 +5,13 @@ import Header from "../components/layouts/Header.astro";
 import Footer from "../components/layouts/Footer.astro";
 import { defaultLang, languages } from "../il8n/ui";
 import { SITE } from "../consts";
-import { locales, meta, type string, type ZodStringFormat } from "astro:schema";
 
 interface Props {
   title: string;
   description?: string;
   lang?: string;
   image?: string;
-  noindex?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -39,7 +38,7 @@ const ogImage = new URL(image, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="stylesheet" href={canonical} />
+    <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     <link rel="icon" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -93,20 +92,5 @@ const ogImage = new URL(image, Astro.site);
         ev.newDocument.documentElement.classList.remove('dark');
       }
     });
-  </script>
-  <script src="/pagefind/pagefind-ui.js" is:inline></script>
-  <script is:inline>
-    window.addEventListener('DOMContentLoaded', () => {
-      if (typeof PagefindUI !== 'undefined') {
-        new PagefindUI({
-          element: '#search',
-          showSubResults: true,
-          translations: {
-            placeholder: "Search articles...",
-            zero_results: "No results for [SEARCH_TERM]"
-          }
-        });
-      }
-    });
-  </script> 
+  </script>  
 </html>

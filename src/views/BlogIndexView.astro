@@ -36,27 +36,30 @@ const copy = {
 </section>
 </BaseLayout>
 <script is:inline>
-import { startsWith } from "astro:schema";
-import { languages } from "../il8n/ui";
-
     function initPagefind() {
-        const searchEl = document.getElementById('search');
-        if (searchEl && typeof PagefindUI !== 'undefined') {
-            searchEl.innerHTML = '';
-            const currentLang = document.documentElement.Lang || 'en';
-            const isSpanish = currentLang.startsWith('es');
-            new PagefindUI ({
-                element: '#search',
-                showSubResults: true,
-                languages: currentLang,
-                translations: {
-                    placeholder: isSpanish ? "Buscar articulos..." : "Search articles...",
-                    zero_results: isSpanish ? "No se encontraron para [SEARCH_TERM]" : "No results for [SEARCH_TERM]",
-                }
-            });
-        } else if (searchEl) {
+        const searchContainer = document.getElementById('search');
+        if(!searchContainer) return;
+
+        if (typeof PagefindUI === 'undefined') {
             setTimeout(initPagefind, 100);
+            return;
         }
+
+        const isSpanish = window.location.pathname.startsWith('/es');
+        const currentLang = isSpanish ? 'es' : 'en';
+
+        const newContainer = searchContainer.cloneNode(false);
+        searchContainer.parentNode.replaceChild(newContainer, searchContainer);
+
+        new PagefindUI({
+            element: '#search',
+            showSubResults: true,
+            language: currentLang,
+            translations: {
+                placeholder: isSpanish ? "Buscar articulos..." :  "Search articles...",
+                zero_results: isSpanish ? "No se encontraron resultados para [SEARCH_TERM]" : "No results for [SEARCH_TERM]",
+            }
+        });
     }
 
     initPagefind();
