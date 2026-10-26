@@ -36,19 +36,25 @@ const copy = {
 </section>
 </BaseLayout>
 <script is:inline>
+import { startsWith } from "astro:schema";
+import { languages } from "../il8n/ui";
+
     function initPagefind() {
-        const searchE1 = document.getElementById('search');
-        if (searchE1 && typeof PagefindUI !== 'undefined') {
-            searchE1.innerHTML = '';
+        const searchEl = document.getElementById('search');
+        if (searchEl && typeof PagefindUI !== 'undefined') {
+            searchEl.innerHTML = '';
+            const currentLang = document.documentElement.Lang || 'en';
+            const isSpanish = currentLang.startsWith('es');
             new PagefindUI ({
                 element: '#search',
                 showSubResults: true,
+                languages: currentLang,
                 translations: {
-                    placeholder: "Search articles...",
-                    zero_results: "No results for [SEARCH_TERM]"
+                    placeholder: isSpanish ? "Buscar articulos..." : "Search articles...",
+                    zero_results: isSpanish ? "No se encontraron para [SEARCH_TERM]" : "No results for [SEARCH_TERM]",
                 }
             });
-        } else if (searchE1) {
+        } else if (searchEl) {
             setTimeout(initPagefind, 100);
         }
     }
